@@ -5,31 +5,47 @@ const VehicleModule = require("./vehicleBaseClass")
 let v = new VehicleModule.Vehicle("Mercury", "Sedan", "1965", "color", "mileage");
 console.log(v.make)
 
+class Car extends VehicleModule.Vehicle {
+    constructor(make, model, year, color, mileage) {
+        super(make, model, year, color, mileage)
+        this.maximumPassengers = 5
+        this.passengers = 0
+        this.numberOfWheels = 4
+        this.maximumSpeed = 160
+        this.fuel = 10
+        this.scheduleService = false
+    }
 
-//After you write the derived Car class, you should test it out.
+    loadPassenger(num) {
+        if (num > this.maximumPassengers) {
+            console.log('There are too many people in the car.')
+        }
+    }
 
-//Note: You can code your derived Car class here or make a file named index.js and do it there.
+    start() {
+        if (this.fuel > 0) {
+            console.log("The car engine started!")
+            return this.started = true
+        } else {
+            console.log("The car fuel is empty.")
+            return this.started = false
+        }
+    }
 
+    timeForService() {
+        if (this.mileage > 30000) {
+            console.log('It\'s time to schedule maintenance.')
+            return this.scheduleService = true
+        } else {
+            console.log("No need for maintenance.")
+            return this.scheduleService = false
+        }
+    }
+}
 
-//TO DO: Code the Car subclass here or in index.js file, i.e. class Car extends Vehicle ...
+let Honda = new Car('mercury', 'rad_sedan', '2002', 'white', 20000)
 
-
-
-
-
-
-
-
-
-
-
-
-//TO DO: Creating Instances and Testing Them
-
-//You can use the same instance "v" of the Vehicle class above for the base class.
-
-
-
-
-
-//Create at least two new instances of the Car class and test them here:
+Honda.start()
+Honda.loadPassenger(7)
+Honda.timeForService()
+console.log(Honda)
